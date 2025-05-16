@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI # type: ignore
 from app.data import guide_steps, fashion_news, fashion_brands, communities
 
 app = FastAPI()
