@@ -53,7 +53,7 @@ Access:
 minikube start
 
 # Apply Kubernetes configs
-kubectl apply -f k8s/
+kubectl apply -f fashion-app.yaml
 
 # Access the app
 minikube service fashion-nginx-service
