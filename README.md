@@ -10,6 +10,7 @@ A simple Kubernetes-deployed web app that helps users stay updated with fashion 
 * ☸️ Kubernetes manifests for production-like deployments via Minikube
 * 📊 Monitoring with Prometheus and Grafana
 * 🔁 Health checks and resource limits in Kubernetes
+* 🚀 GitHub Actions CI/CD for build & test automation.
 
 ---
 
@@ -28,7 +29,9 @@ A simple Kubernetes-deployed web app that helps users stay updated with fashion 
 │   ├── index.html
 │   └── nginx.conf
 ├── docker-compose.yml
-└── fashion-app.yaml
+├─-fashion-app.yaml
+└── .github/workflows/
+    └── ci-cd.yml
 ```
 
 ---
@@ -123,7 +126,3 @@ Base URL: `/api/`
 * **Frontend:** `s1mphonia/fashion-nginx`
 
 ---
-
-### 📊 TODO (Next Steps)
-
-* [ ] CI/CD with GitHub Actions
