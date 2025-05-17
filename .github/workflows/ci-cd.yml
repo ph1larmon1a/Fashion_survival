@@ -1,5 +1,4 @@
 name: Fashion Guide CI/CD
-
 on:
   push:
     branches: ["main"]
