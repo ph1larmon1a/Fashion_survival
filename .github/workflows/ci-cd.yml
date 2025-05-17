@@ -52,7 +52,7 @@ jobs:
 
     - name: Ensure backend is not empty
       run: |
-        content=$(curl -s http://localhost:8000)
+        content=$(curl -s http://localhost:8001)
         if [ -z "$content" ]; then
           echo "❌ Backend returned empty response"
           exit 1
