@@ -67,6 +67,9 @@ Deploy:
 # Start Minikube
 minikube start
 
+# Enable 'ingress' addon
+minikube addons enable ingress
+
 # Apply Kubernetes configs
 kubectl apply -f fashion-app.yaml
 
