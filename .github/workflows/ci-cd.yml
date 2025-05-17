@@ -42,7 +42,7 @@ jobs:
 
     - name: Check frontend container is running
       run: |
-        docker ps | grep frontend && echo "✅ Frontend container is running" || (echo "❌ Frontend container not running" && exit 1)
+        docker ps | grep fashion_survival-nginx && echo "✅ Frontend container is running" || (echo "❌ Frontend container not running" && exit 1)
 
     - name: Ensure backend is not empty
       run: |
