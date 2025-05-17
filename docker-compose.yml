@@ -3,14 +3,14 @@ version: "3.9"
 services:
   backend:
     build: ./backend
-    image: sofiakulagina/fashion-backend:latest
+    image: s1mphonia/fashion-backend:latest
     ports:
       - 8001:8000
     container_name: fashion-backend
 
   nginx:
     build: ./frontend
-    image: sofiakulagina/fashion-nginx:latest
+    image: s1mphonia/fashion-nginx:latest
     ports:
       - "8080:80"
     depends_on:

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: sofiakulagina/fashion-backend:latest
+        image: s1mphonia/fashion-backend:latest
         ports:
         - containerPort: 8000
         resources:
@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: sofiakulagina/fashion-nginx:latest
+        image: s1mphonia/fashion-nginx:latest
         ports:
         - containerPort: 80
         resources:
