@@ -1,0 +1,52 @@
+name: Build and Deploy Fashion App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build backend
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fashion-backend:latest ./backend
+
+    - name: Build frontend
+      run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/fashion-nginx:latest ./frontend
+
+    - name: Run backend
+      run: docker run -d -p 8000:8000 --name backend ${{ secrets.DOCKERHUB_USERNAME }}/fashion-backend:latest
+
+    - name: Test backend
+      run: |
+        sleep 5
+        curl -s http://localhost:8000 | grep "Fashion" && echo "✅ Backend OK" || (echo "❌ Backend FAILED"; exit 1)
+
+    - name: Run frontend
+      run: docker run -d -p 8080:80 --name frontend ${{ secrets.DOCKERHUB_USERNAME }}/fashion-nginx:latest
+
+    - name: Test frontend
+      run: |
+        sleep 5
+        curl -s http://localhost:8080 | grep "Fashion Survival Guide" && echo "✅ Frontend OK" || (echo "❌ Frontend FAILED"; exit 1)
+
+    - name: Push backend to DockerHub
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/fashion-backend:latest
+
+    - name: Push frontend to DockerHub
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/fashion-nginx:latest
