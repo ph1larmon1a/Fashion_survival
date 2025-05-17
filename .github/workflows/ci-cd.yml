@@ -82,10 +82,10 @@ jobs:
       run: docker-compose down
 
     - name: Push backend image
-      run: docker push s1mphonia/fashion-backend:latest
+      run: docker push sofiakulagina/fashion-backend:latest
 
     - name: Push frontend image
-      run: docker push s1mphonia/fashion-nginx:latest
+      run: docker push sofiakulagina/fashion-nginx:latest
 
 
 
