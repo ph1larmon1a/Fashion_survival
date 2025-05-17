@@ -62,7 +62,7 @@ jobs:
 
     - name: Test backend API root
       run: |
-        curl --fail http://localhost:8000/ | grep "Fashion Trends Guide API" && echo "✅ Backend OK" || (echo "❌ Backend FAIL" && exit 1)
+        curl --fail http://localhost:8001/ | grep "Fashion Trends Guide API" && echo "✅ Backend OK" || (echo "❌ Backend FAIL" && exit 1)
 
     - name: Ensure frontend is not empty
       run: |
