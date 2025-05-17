@@ -20,6 +20,11 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+    - name: Install Docker Compose
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker-compose
+
     - name: Ensure ports 8000 and 8080 are free
       run: |
         ! lsof -i :8000 && echo "✅ Port 8000 is free" || (echo "❌ Port 8000 is occupied" && exit 1)
@@ -75,3 +80,151 @@ jobs:
 
     - name: Push frontend image
       run: docker push s1mphonia/fashion-nginx:latest
+
+
+# name: Fashion Guide CI/CD
+
+# on:
+#   push:
+#     branches: ["main"]
+#   pull_request:
+#     branches: ["main"]
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout repo
+#       uses: actions/checkout@v3
+
+#     - name: Login to DockerHub
+#       uses: docker/login-action@v3
+#       with:
+#         username: ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+#     - name: Build backend image
+#       run: docker build -t s1mphonia/fashion-backend:latest ./backend
+
+#     - name: Build frontend image
+#       run: docker build -t s1mphonia/fashion-nginx:latest ./frontend
+
+#     # Проверка портов
+#     - name: Ensure ports 8000 and 8080 are free
+#       run: |
+#         ! lsof -i :8000 && echo "✅ Port 8000 is free" || (echo "❌ Port 8000 is occupied" && exit 1)
+#         ! lsof -i :8080 && echo "✅ Port 8080 is free" || (echo "❌ Port 8080 is occupied" && exit 1)
+
+#     - name: Run backend container
+#       run: docker run -d -p 8000:8000 --name test-backend s1mphonia/fashion-backend:latest
+
+#     - name: Wait for backend
+#       run: sleep 5
+
+#     - name: Check backend container is running
+#       run: |
+#         docker ps | grep test-backend && echo "✅ Backend container is running" || (echo "❌ Backend container not running" && exit 1)
+
+#     - name: Ensure backend is not empty
+#       run: |
+#         content=$(curl -s http://localhost:8000)
+#         if [ -z "$content" ]; then
+#           echo "❌ Backend returned empty response"
+#           exit 1
+#         else
+#           echo "✅ Backend returned non-empty response"
+#         fi
+
+#     - name: Test backend API root
+#       run: |
+#         curl --fail http://localhost:8000/ | grep "Fashion Trends Guide API" && echo "✅ Backend OK" || (echo "❌ Backend FAIL" && exit 1)
+
+#     - name: Run frontend container
+#       run: docker run -d -p 8080:80 --name test-frontend s1mphonia/fashion-nginx:latest
+
+#     - name: Wait for frontend
+#       run: sleep 5
+
+#     - name: Check frontend container is running
+#       run: |
+#         docker ps | grep test-frontend && echo "✅ Frontend container is running" || (echo "❌ Frontend container not running" && exit 1)
+
+#     - name: Ensure frontend is not empty
+#       run: |
+#         content=$(curl -s http://localhost:8080)
+#         if [ -z "$content" ]; then
+#           echo "❌ Frontend returned empty response"
+#           exit 1
+#         else
+#           echo "✅ Frontend returned non-empty response"
+#         fi
+
+#     - name: Test frontend page
+#       run: |
+#         curl -s http://localhost:8080 | grep "Fashion Survival Guide" && echo "✅ Frontend OK" || (echo "❌ Frontend FAIL" && exit 1)
+
+#     - name: Push backend image
+#       run: docker push s1mphonia/fashion-backend:latest
+
+#     - name: Push frontend image
+#       run: docker push s1mphonia/fashion-nginx:latest
+
+
+
+
+
+
+
+# name: Fashion Guide CI/CD
+# on:
+#   push:
+#     branches: ["main"]
+#   pull_request:
+#     branches: ["main"]
+
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - name: Checkout repo
+#       uses: actions/checkout@v3
+
+#     - name: Login to DockerHub
+#       uses: docker/login-action@v3
+#       with:
+#         username: ${{ secrets.DOCKERHUB_USERNAME }}
+#         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+#     - name: Build backend image
+#       run: docker build -t s1mphonia/fashion-backend:latest ./backend
+
+#     - name: Build frontend image
+#       run: docker build -t s1mphonia/fashion-nginx:latest ./frontend
+
+#     - name: Run backend container
+#       run: docker run -d -p 8000:8000 --name test-backend s1mphonia/fashion-backend:latest
+
+#     - name: Wait for backend
+#       run: sleep 5
+
+#     - name: Test backend API root
+#       run: |
+#         curl --fail http://localhost:8000/ | grep "Fashion Trends Guide API" && echo "✅ Backend OK" || (echo "❌ Backend FAIL" && exit 1)
+
+#     - name: Run frontend container
+#       run: docker run -d -p 8080:80 --name test-frontend s1mphonia/fashion-nginx:latest
+
+#     - name: Wait for frontend
+#       run: sleep 5
+
+#     - name: Test frontend page
+#       run: |
+#         curl -s http://localhost:8080 | grep "Fashion Survival Guide" && echo "✅ Frontend OK" || (echo "❌ Frontend FAIL" && exit 1)
+
+#     - name: Push backend image
+#       run: docker push s1mphonia/fashion-backend:latest
+
+#     - name: Push frontend image
+#       run: docker push s1mphonia/fashion-nginx:latest
