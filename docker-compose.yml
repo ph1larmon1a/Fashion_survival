@@ -3,14 +3,16 @@ version: "3.9"
 services:
   backend:
     build: ./backend
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    image: s1mphonia/fashion-backend:latest
     ports:
       - 8001:8000
     container_name: fashion-backend
 
   nginx:
     build: ./frontend
+    image: s1mphonia/fashion-nginx:latest
     ports:
       - "8080:80"
     depends_on:
       - backend
+
