@@ -6,7 +6,7 @@ services:
     image: s1mphonia/fashion-backend:latest
     ports:
       - 8001:8000
-    container_name: fashion-backend
+    container_name: fashion-backend-service
 
   nginx:
     build: ./frontend
