@@ -29,7 +29,7 @@ A simple Kubernetes-deployed web app that helps users stay updated with fashion 
 │   ├── index.html
 │   └── nginx.conf
 ├── docker-compose.yml
-├─-fashion-app.yaml
+├── fashion-app.yaml
 └── .github/workflows/
     └── ci-cd.yml
 ```
